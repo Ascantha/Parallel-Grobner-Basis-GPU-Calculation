@@ -719,8 +719,8 @@ class F5_2:
             #GPU Algorithm Here
             instance = gpuadder.GPUCublas()
             instance.call_cublas_gpu_finite_double(matrix_gpu_list, nrows, ncols, field_size_var)
-            #R = IntegerModRing(field_size_var)
-            R = RealField(100)
+            R = IntegerModRing(field_size_var)
+            #R = RealField(100)
             
             for c in xrange(ncols):
                 for r in xrange(nrows):
