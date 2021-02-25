@@ -382,6 +382,7 @@ int F4_5_GuassianElimination_Finite_Double (double * inputMatrix, int rows, int 
 }
 
 int F4_5_GuassianElimination (double * inputMatrix, int rows, int cols, int dontPrint, int checkRef) {
+    printf("TEST\n");
     double *hostMatrix = 0;
     double *deviceMatrix = 0;
     cudaError_t cudaStat;

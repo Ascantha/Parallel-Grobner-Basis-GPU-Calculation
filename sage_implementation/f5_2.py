@@ -439,6 +439,7 @@ class F5_2:
         ml, el = sig(l)
 
         # they are are same
+        #if abs(ek - el) > 0.0001 and abs(uk*mk - ul*ml) > 0.0001:
         if ek == el and uk*mk == ul*ml:
             return tuple()
         
@@ -515,7 +516,7 @@ class F5_2:
         Ft = self.gauss_elimination(F)
         end = time.clock()
         tt = end - start
-        print(" G. Elimination Func. Time: [%6f]")%tt,
+        print("\nG. Elimination Func. Time: [%6f]")%tt,
         elim_run_time += tt
 
         Ret = []
@@ -718,13 +719,14 @@ class F5_2:
         else:        
             #GPU Algorithm Here
             instance = gpuadder.GPUCublas()
-            instance.call_cublas_gpu_finite_double(matrix_gpu_list, nrows, ncols, field_size_var)
+            #instance.call_cublas_gpu_finite_double(matrix_gpu_list, nrows, ncols, field_size_var)
+            instance.call_cublas_gpu(matrix_gpu_list, nrows, ncols)
             R = IntegerModRing(field_size_var)
-            #R = RealField(100)
             
             for c in xrange(ncols):
                 for r in xrange(nrows):
-                    A[r,c] = IntegerMod(R, matrix_gpu_list[idx2c(r,c,nrows)]) 
+                    #A[r,c] = IntegerMod(R, matrix_gpu_list[idx2c(r,c,nrows)])
+                    A[r,c] = matrix_gpu_list[idx2c(r,c,nrows)]
 
         t_end = time.clock()
         
